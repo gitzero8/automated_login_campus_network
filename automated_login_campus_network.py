@@ -21,7 +21,7 @@ except:
 class Campus_Network():
     def __init__(self):
         # 加载opr_conf配置文件
-        print("导导入config配置文件...")
+        print("导入config配置文件...")
         with open("./apo_config.conf") as open_config_file:
             self.apo_config_data = eval(open_config_file.read())
         self.accounts  = self.apo_config_data["account"]
@@ -42,13 +42,19 @@ class Campus_Network():
             print("[*]您已执行注销操作...")
             self.open_web.find_element(By.XPATH,'//*[@id="layui-layer1"]/div[3]/a[1]').click()
             time.sleep(1)
-            self.open_web.find_element(By.XPATH,'//*[@id="edit_body"]/div[1]/div[1]/form/input').click()
+            try:
+                self.open_web.find_element(By.XPATH,'//*[@id="edit_body"]/div[1]/div[1]/form/input').click()
+            except:
+                pass
             time.sleep(1)
             self.login_campus_network()
             self.open_web.quit()
         else:
             print("[*]您已取消注销操作...")
-            self.open_web.find_element(By.XPATH,'//*[@id="layui-layer1"]/div[3]/a[2]').click()
+            try:
+                self.open_web.find_element(By.XPATH,'//*[@id="layui-layer1"]/div[3]/a[2]').click()
+            except:
+                pass
             time.sleep(1)
     def login_campus_network(self):
         print("[*]正在输入账号...")
